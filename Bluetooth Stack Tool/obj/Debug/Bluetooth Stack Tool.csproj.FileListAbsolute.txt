@@ -5,3 +5,4 @@ E:\Documents\## Wii\Codes\Bluetooth Stack Tool\Bluetooth Stack Tool\bin\Debug\Bl
 E:\Documents\## Wii\Codes\Bluetooth Stack Tool\Bluetooth Stack Tool\bin\Debug\Bluetooth Stack Tool.pdb
 E:\Documents\## Wii\Codes\Bluetooth Stack Tool\Bluetooth Stack Tool\obj\Debug\Bluetooth Stack Tool.exe
 E:\Documents\## Wii\Codes\Bluetooth Stack Tool\Bluetooth Stack Tool\obj\Debug\Bluetooth Stack Tool.pdb
+E:\Documents\## Wii\Codes\Bluetooth Stack Tool\Bluetooth Stack Tool\obj\Debug\Bluetooth_Stack_Tool.Form1.resources
