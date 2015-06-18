@@ -1,29 +1,20 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Bluetooth Stack Tool helps to automate the steps required to install Toshiba Bluetooth Stack. 
 
 ### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* Automates the following:
+ * Identify your Bluetooth Adapter's hardware ID.
+ * Insert the entries into C:\Program Files (x86)\Toshiba\Bluetooth Toshiba Stack\Drivers\tosrfusb\tosrfusb.inf.
+ * Update the registry to pretend to be a Toshiba Bluetooth Stack compatible adapter.
+* [http://www.boonjin.com/wp/2015/06/18/toshiba-bluetooth-stack-installation](http://www.boonjin.com/wp/2015/06/18/toshiba-bluetooth-stack-installation)
 
 ### How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* Requires Microsoft Visual Studio 2008
 
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
 
 ### Who do I talk to? ###
 
-* Repo owner or admin
-* Other community or team contact
+* Boon Jin [boonjin.com](http://www.boonjin.com)
