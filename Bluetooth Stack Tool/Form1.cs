@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Management;
 using System.IO;
 using Microsoft.Win32;
+using System.Threading;
 
 namespace Bluetooth_Stack_Tool
 {
@@ -22,21 +23,31 @@ namespace Bluetooth_Stack_Tool
 
         public Form1()
         {
-            InitializeComponent();      
+            InitializeComponent();
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             retrieveVIDPID();
+
+            if (Environment.OSVersion.ToString().Contains("6.2."))
+            {
+                //windows 8;
+            }
+            else
+            {
+                groupBoxWin8.Visible = false;
+            }
         }
         private void writeLog(string message)
         {
-             BeginInvoke((MethodInvoker)delegate()
-            {
-                textBoxLog.Text += System.Environment.NewLine + message;
-                textBoxLog.SelectionStart = textBoxLog.TextLength;
-                textBoxLog.ScrollToCaret();
-            });
+            BeginInvoke((MethodInvoker)delegate()
+           {
+               textBoxLog.Text += System.Environment.NewLine + message;
+               textBoxLog.SelectionStart = textBoxLog.TextLength;
+               textBoxLog.ScrollToCaret();
+           });
         }
 
         private void buttonRetrieveDevices_Click(object sender, EventArgs e)
@@ -63,7 +74,7 @@ namespace Bluetooth_Stack_Tool
         private void retrieveVIDPID()
         {
             ManagementClass class1 = new ManagementClass("Win32_PnPEntity");
-            
+
             foreach (ManagementObject ob in class1.GetInstances())
             {
                 Object obj = ob["Name"];
@@ -83,7 +94,7 @@ namespace Bluetooth_Stack_Tool
                         writeLog(objName);
                         writeLog(objDeviceID);
                         writeLog("");
-                       // MessageBox.Show(objName + "  " + objDescription);
+                        // MessageBox.Show(objName + "  " + objDescription);
                     }
                 }
             }
@@ -100,7 +111,15 @@ namespace Bluetooth_Stack_Tool
 
             try
             {
+                string toshibaPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                toshibaPath = Path.Combine(toshibaPath, @"Temp\tc00590500a.temp\Setup.exe");
 
+                if (File.Exists(toshibaPath))
+                {
+                    System.Diagnostics.Process.Start(toshibaPath);
+                }
+
+                writeLog(toshibaPath);
                 writeLog("Run - Complete");
             }
             catch (Exception ex)
@@ -112,7 +131,13 @@ namespace Bluetooth_Stack_Tool
 
         private void updateINF()
         {
+
             writeLog("Updating INF");
+            BeginInvoke((MethodInvoker)delegate()
+            {
+                buttonUpdateINF.Enabled = false;
+            });
+
             try
             {
                 //back up tosrfusb.inf before proceeding
@@ -138,11 +163,11 @@ namespace Bluetooth_Stack_Tool
 
 
                 string stringINF = System.IO.File.ReadAllText(INF_PATH);
-                
+
                 //find for end for first group containing 'TosrfUsb_Device'
                 string stringSearch = "TosrfUsb.DeviceDesc";
-                
-                                
+
+
                 int positionText = 0;
                 int positionToInsert1 = 0;
                 int positionToInsert2 = 0;
@@ -152,7 +177,7 @@ namespace Bluetooth_Stack_Tool
                 if (positionText > 0)
                 {
                     positionToInsert1 = stringINF.IndexOf("\r\n\r\n", positionText);
-                    
+
                 }
 
                 int positionIndex = 0;
@@ -183,7 +208,7 @@ namespace Bluetooth_Stack_Tool
                     positionToInsert3 = stringINF.IndexOf("\r\n\r\n", positionText);
                     if (positionToInsert3 < 0)
                     {
-                        positionToInsert3 = stringINF.Length-2;
+                        positionToInsert3 = stringINF.Length - 2;
                     }
                 }
 
@@ -192,16 +217,16 @@ namespace Bluetooth_Stack_Tool
                 string stringToAdd1 = "";
                 string stringToAdd3 = "";
 
-                for (int i = 0; i < deviceListID.Count; i++ )
+                for (int i = 0; i < deviceListID.Count; i++)
                 {
                     deviceIndex++;
 
-                    stringToAdd1 = System.Environment.NewLine + "%TosrfUsb.DeviceDesc" + deviceIndex.ToString() + "%=TosrfUsb_Device,  " +
-                    deviceListID[i];
-                    stringToAdd3 = System.Environment.NewLine + "TosrfUsb.DeviceDesc" + deviceIndex.ToString() + " = \"" +
-deviceListName[i] + "\"";
+                    stringToAdd1 = System.Environment.NewLine + "%TosrfUsb.DeviceDesc" + deviceIndex.ToString() +
+                        "%=TosrfUsb_Device,  " + deviceListID[i];
+                    stringToAdd3 = System.Environment.NewLine + "TosrfUsb.DeviceDesc" + deviceIndex.ToString() +
+                        " = \"" + deviceListName[i] + "\"";
                 }
-                
+
 
                 //insert strings from the back
                 string stringINFNew = stringINF.Insert(positionToInsert3, stringToAdd3);
@@ -211,16 +236,25 @@ deviceListName[i] + "\"";
                 System.IO.File.WriteAllText(INF_PATH, stringINFNew);
 
                 writeLog("Updating INF - Complete");
+                BeginInvoke((MethodInvoker)delegate()
+                {
+                    buttonUpdateINF.Enabled = true;
+                });
             }
             catch (Exception ex)
             {
                 writeLog("Updating INF - Failed : " + ex.ToString());
+                BeginInvoke((MethodInvoker)delegate()
+                {
+                    buttonUpdateINF.Enabled = true;
+                });
             }
         }
 
         private void fileSystemWatcher_Created(object sender, FileSystemEventArgs e)
         {
             writeLog("INF file created");
+            Thread.Sleep(500);
             updateINF();
         }
 
@@ -239,6 +273,56 @@ deviceListName[i] + "\"";
             catch (Exception ex)
             {
                 writeLog("Patching Registry - Failed : " + ex.ToString());
+            }
+        }
+
+        private void buttonDownload_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start("http://support.toshiba.com/support/viewContentDetail?contentId=4007183");
+            }
+            catch (Exception ex)
+            {
+                writeLog(ex.ToString());
+            }
+        }
+
+        private void buttonDisableDriver_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start("https://learn.sparkfun.com/tutorials/disabling-driver-signature-on-windows-8/disabling-signed-driver-enforcement-on-windows-8");
+            }
+            catch (Exception ex)
+            {
+                writeLog(ex.ToString());
+            }
+        }
+
+        private void buttonRestart_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult result = MessageBox.Show("Would you like to proceed to restart the computer?" + System.Environment.NewLine +
+                    "Unsaved files may be lost", "Shutdown", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+                switch (result)
+                {
+                    case DialogResult.OK:
+                        {
+                            System.Diagnostics.Process.Start("shutdown", "/r /o");
+                        }
+                        break;
+                    case DialogResult.Cancel:
+                        {
+                        }
+                        break;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                writeLog(ex.ToString());
             }
         }
 

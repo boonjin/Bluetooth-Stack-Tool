@@ -1,8 +1,9 @@
 E:\Documents\## Wii\Codes\Bluetooth Stack Tool\Bluetooth Stack Tool\obj\Debug\ResolveAssemblyReference.cache
 E:\Documents\## Wii\Codes\Bluetooth Stack Tool\Bluetooth Stack Tool\obj\Debug\Bluetooth_Stack_Tool.Properties.Resources.resources
 E:\Documents\## Wii\Codes\Bluetooth Stack Tool\Bluetooth Stack Tool\obj\Debug\Bluetooth Stack Tool.csproj.GenerateResource.Cache
-E:\Documents\## Wii\Codes\Bluetooth Stack Tool\Bluetooth Stack Tool\bin\Debug\Bluetooth Stack Tool.exe
-E:\Documents\## Wii\Codes\Bluetooth Stack Tool\Bluetooth Stack Tool\bin\Debug\Bluetooth Stack Tool.pdb
-E:\Documents\## Wii\Codes\Bluetooth Stack Tool\Bluetooth Stack Tool\obj\Debug\Bluetooth Stack Tool.exe
-E:\Documents\## Wii\Codes\Bluetooth Stack Tool\Bluetooth Stack Tool\obj\Debug\Bluetooth Stack Tool.pdb
 E:\Documents\## Wii\Codes\Bluetooth Stack Tool\Bluetooth Stack Tool\obj\Debug\Bluetooth_Stack_Tool.Form1.resources
+E:\Documents\## Wii\Codes\Bluetooth Stack Tool\Bluetooth Stack Tool\bin\Debug\BluetoothStackTool.exe
+E:\Documents\## Wii\Codes\Bluetooth Stack Tool\Bluetooth Stack Tool\bin\Debug\BluetoothStackTool.pdb
+E:\Documents\## Wii\Codes\Bluetooth Stack Tool\Bluetooth Stack Tool\obj\Debug\BluetoothStackTool.exe
+E:\Documents\## Wii\Codes\Bluetooth Stack Tool\Bluetooth Stack Tool\obj\Debug\BluetoothStackTool.pdb
+E:\Documents\## Wii\Codes\Bluetooth Stack Tool\Bluetooth Stack Tool\obj\Debug\Bluetooth_Stack_Tool.FormDisclaimer.resources
