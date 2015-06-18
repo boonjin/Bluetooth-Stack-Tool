@@ -15,7 +15,7 @@ namespace Bluetooth_Stack_Tool
 {
     public partial class Form1 : Form
     {
-        private string INF_PATH = @"C:\Program Files (x86)\Toshiba\Bluetooth Toshiba Stack\Drivers\tosrfusb\tosrfusb.inf";
+        private string INF_PATH = @"\Toshiba\Bluetooth Toshiba Stack\Drivers\tosrfusb\tosrfusb.inf";
         //private string INF_PATH = Directory.GetCurrentDirectory() + @"\tosrfusb.inf";
 
         private List<string> deviceListID = new List<string>();
@@ -24,7 +24,9 @@ namespace Bluetooth_Stack_Tool
         public Form1()
         {
             InitializeComponent();
+            string strProgramFiles = Environment.GetEnvironmentVariable("PROGRAMFILES(X86)") ?? Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
 
+            INF_PATH = strProgramFiles + INF_PATH;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -292,7 +294,7 @@ namespace Bluetooth_Stack_Tool
         {
             try
             {
-                System.Diagnostics.Process.Start("https://learn.sparkfun.com/tutorials/disabling-driver-signature-on-windows-8/disabling-signed-driver-enforcement-on-windows-8");
+                System.Diagnostics.Process.Start("http://www.boonjin.com/wp/2015/06/18/disable-driver-signature-enforcement-in-windows-8");
             }
             catch (Exception ex)
             {
@@ -304,7 +306,7 @@ namespace Bluetooth_Stack_Tool
         {
             try
             {
-                DialogResult result = MessageBox.Show("Would you like to proceed to restart the computer?" + System.Environment.NewLine +
+                DialogResult result = MessageBox.Show("Would you like to proceed to restart the computer in Advanced Startup mode?" + System.Environment.NewLine +
                     "Unsaved files may be lost", "Shutdown", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
                 switch (result)
                 {
@@ -324,6 +326,11 @@ namespace Bluetooth_Stack_Tool
             {
                 writeLog(ex.ToString());
             }
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
 
 

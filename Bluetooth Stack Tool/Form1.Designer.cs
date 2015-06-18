@@ -42,6 +42,7 @@
             this.buttonDisableDriver = new System.Windows.Forms.Button();
             this.groupBoxWin8 = new System.Windows.Forms.GroupBox();
             this.buttonRestart = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBoxWin8.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -92,9 +93,9 @@
             // 
             this.buttonPatch.Location = new System.Drawing.Point(27, 194);
             this.buttonPatch.Name = "buttonPatch";
-            this.buttonPatch.Size = new System.Drawing.Size(173, 34);
+            this.buttonPatch.Size = new System.Drawing.Size(173, 47);
             this.buttonPatch.TabIndex = 4;
-            this.buttonPatch.Text = "Patch Registry for evaluation";
+            this.buttonPatch.Text = "Patch Registry to \'Pretend\' as Toshiba Stack Adapter";
             this.buttonPatch.UseVisualStyleBackColor = true;
             this.buttonPatch.Click += new System.EventHandler(this.buttonPatch_Click);
             // 
@@ -162,22 +163,34 @@
             this.groupBoxWin8.Size = new System.Drawing.Size(187, 60);
             this.groupBoxWin8.TabIndex = 11;
             this.groupBoxWin8.TabStop = false;
-            this.groupBoxWin8.Text = "If unable to detect device, disable driver signing";
+            this.groupBoxWin8.Text = "If unable to detect device, disable driver signing enforcement";
             // 
             // buttonRestart
             // 
-            this.buttonRestart.Location = new System.Drawing.Point(103, 30);
+            this.buttonRestart.Location = new System.Drawing.Point(79, 30);
             this.buttonRestart.Name = "buttonRestart";
-            this.buttonRestart.Size = new System.Drawing.Size(78, 24);
+            this.buttonRestart.Size = new System.Drawing.Size(102, 24);
             this.buttonRestart.TabIndex = 11;
-            this.buttonRestart.Text = "Restart Now";
+            this.buttonRestart.Text = "Restart Computer";
             this.buttonRestart.UseVisualStyleBackColor = true;
             this.buttonRestart.Click += new System.EventHandler(this.buttonRestart_Click);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Location = new System.Drawing.Point(12, 247);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(581, 24);
+            this.richTextBox1.TabIndex = 12;
+            this.richTextBox1.Text = "Need Help? http://www.boonjin.com/wp/2015/06/18/toshiba-bluetooth-stack-installat" +
+                "ion";
             // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(605, 245);
+            this.ClientSize = new System.Drawing.Size(605, 274);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBoxWin8);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -191,8 +204,9 @@
             this.Controls.Add(this.buttonRetrieveDevices);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Bluetooth Stack Tool";
+            this.Text = "Bluetooth Stack Tool - 0.9.1.0";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.groupBoxWin8.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -214,6 +228,7 @@
         private System.Windows.Forms.Button buttonDisableDriver;
         private System.Windows.Forms.GroupBox groupBoxWin8;
         private System.Windows.Forms.Button buttonRestart;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
